@@ -42,8 +42,8 @@ const FEATURES = {
     {
       name: '15.3" HGTV (3840 x 2160) Home makeover edition',
       cost: 1400
-    },
+    }
   ]
 };
 
-ReactDOM.render(<App features={FEATURES}/>, document.getElementById('root'));
+ReactDOM.render(<App key = {3} features={FEATURES}/>, document.getElementById('root'));
