@@ -1,13 +1,12 @@
 import React, { Component } from 'react';
-
+import FEATURES from './index';
 // Normalizes string as a slug - a string that is safe to use
 // in both URLs and html attributes
-import slugify from 'slugify';
 import Header from './Header';
 import FeatureName from './FeatureName';
 import Total from './Total';
 import SummaryList from './SummaryList';
-
+import Main from './Main.js'
 import './App.css';
 
 // This object will allow us to
@@ -22,6 +21,7 @@ class App extends Component {
   constructor (props){
     super(props);
     this.state = {
+      features: FEATURES,
       selected: {
         Processor: {
           name: '17th Generation Intel Core HB (7 Core with donut spare)',
@@ -43,16 +43,14 @@ class App extends Component {
     };
   }
 
-  updateFeature (feature, newValue) {
+  updateFeature = (feature, newValue) => {
     const selected = Object.assign({}, this.state.selected);
     selected[feature] = newValue;
     this.setState({
       selected
     });
   };
-  
   // render() {
-    
   // return (
   //         <div key={itemHash} className="feature__item">
   //           <input
@@ -100,59 +98,27 @@ class App extends Component {
     //   0
     // );
 
-    
-    render(){
-      const summary = Object.keys(this.state.selected).map(
-          (feature, idx) => {
-          const featureHash = feature + '-' + idx;
-          const selectedOption = this.state.selected[feature];
-          
-          
-        
-        }
-          
-          )
-
+    render() {
           // const total = Object.keys(this.state.selected).reduce(
           //     (acc, curr) => acc + this.state.selected[curr].cost,
           //     0
           //   );
     
-      const features = Object.keys(this.props.features).map((feature, idx) => {
-        const featureHash = feature + '-' + idx;
-        const options = this.props.features[feature].map(item => {
-          const itemHash = slugify(JSON.stringify(item));})
-        })
     return (
-      <div key = {2} className="App">
+      <div className="App">
         <Header />
-        <main>
-          <form className="main__form">
-            <h2>Customize your laptop</h2>
-            
-            
-
-          </form>
-          <section className="main__summary">
-            <h2>Your cart</h2>
-            {summary}
-            
-          </section>
-        </main>
+        <Main />
         <FeatureName 
               updateFeature = {this.updateFeature}
               features = {this.props.features}
-              selected = {this.state.selected}
-              
-          />
+              selected = {this.state.selected}   
+        />
         <SummaryList 
-          key = {1}
           selected= {this.state.selected}
           features = {this.state.features}
           name = {this.selectedOption}
-          selectedOption = {summary}
+          // selectedOption = {summary}
         />
-        
         <Total 
           selected= {this.state.selected}
         />

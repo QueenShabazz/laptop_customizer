@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
 import FeatureOption from './FeatureOption'
-import slugify from 'slugify';
 
 class FeatureName extends Component { 
   constructor(props){
@@ -11,37 +10,33 @@ class FeatureName extends Component {
     }
   }
 render() {
-  const summary = Object.keys(this.state.selected).map((feature, idx) => {
-    const featureHash = feature + '-' + idx;
-    const selectedOption = this.state.selected[feature]; })
-  const itemHash = slugify(JSON.stringify(this.state.item));
-  const features = Object.keys(this.props.features).map((feature, idx) => {
-    const featureHash = feature + '-' + idx;
-    const options = this.props.features[feature].map(item => {
-      const itemHash = slugify(JSON.stringify(item));})
-    })
-    console.log(this.props)
-  return(
-    <div>
-    {/* <h3>{this.feature}</h3>
-    <fieldset className="feature" key={this.featureHash}>
-      <legend className="feature__name"> */}
-        <FeatureOption
-          selected={this.props.selected} 
-          features={this.props.features} 
-          updateFeature={this.props.updateFeature}
-        />
-      {/* </legend>
-      {this.options}
-    </fieldset> */}
-    
-    </div>
-    
+  const features = Object.keys(this.props.features)
+    .map((feature, idx) => {
+      const featureHash = feature + '-' + idx;      
+      return(
+            <FeatureOption
+                key={featureHash}
+                feature={feature}
+                options={this.props.features[feature]}
+                selected={this.props.selected} 
+                updateFeature={this.props.updateFeature}
+            />
+      );
+      }); 
+    return(
+          <form>
 
-  );
-  
+            {features}
+          </form>
+    );
   }
-}  
-
+}
+// const summary = Object.keys(this.state.selected).map((feature, idx) => {
+//     const featureHash = feature + '-' + idx;
+//     const selectedOption = this.state.selected[feature]; })
+//     console.log(features)
+//   const itemHash = slugify(JSON.stringify(this.state.item));
+  
+//     console.log(this.state.selected)
 
 export default FeatureName;

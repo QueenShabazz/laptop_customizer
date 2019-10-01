@@ -46,4 +46,5 @@ const FEATURES = {
   ]
 };
 
-ReactDOM.render(<App key = {3} features={FEATURES}/>, document.getElementById('root'));
+export default FEATURES 
+ReactDOM.render(<App features={FEATURES}/>, document.getElementById('root'));
